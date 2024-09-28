@@ -5,50 +5,52 @@ from streamlit_option_menu import option_menu
 
 # loading the saved models
 
-breast_cancer = pickle.load(open('', 'rb'))
+breast_cancer = pickle.load(open('BreastCancer_model.sav', 'rb'))
 # page title
-st.title('Diabetes Prediction using ML')
+st.title('Breast Cancer Prediction using ML')
 
 
 # getting the input data from the user
-col1, col2, col3 = st.columns(3)
+col1, col2, col3,col4, col5 = st.columns(5)
 
 with col1:
-    Pregnancies = st.text_input('Number of Pregnancies')
+    Diagnosis = st.text_input('Diagnosis')
     
 with col2:
-    Glucose = st.text_input('Glucose Level')
+    Radius_mean = st.text_input('Radius Mean')
 
 with col3:
-    BloodPressure = st.text_input('Blood Pressure value')
+    Texture_mean = st.text_input('Texture Mean')
+    
+with col4:
+    Perimeter_mean = st.text_input('Perimeter Mean')
+    
+with col5:
+    Area_mean = st.text_input('Area Mean')
 
 with col1:
-    SkinThickness = st.text_input('Skin Thickness value')
-
+    Smoothness_mean = st.text_input('Smoothness Mean')
+    
 with col2:
-    Insulin = st.text_input('Insulin Level')
+    Compactness_mean = st.text_input('Compactness Mean')
 
 with col3:
-    BMI = st.text_input('BMI value')
-
-with col1:
-    DiabetesPedigreeFunction = st.text_input('Diabetes Pedigree Function value')
-
-with col2:
-    Age = st.text_input('Age of the Person')
-
+    Contactivity_mean = st.text_input('Contactivity Mean')
+    
+with col4:
+    Concave_points_mean = st.text_input('Concave Points Mean')
 
 # code for Prediction
-diab_diagnosis = ''
+breast_cancer_diagnosis = ''
 
 # creating a button for Prediction
 
-if st.button('Diabetes Test Result'):
-    diab_prediction = diabetes_model.predict([[Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]])
+if st.button('Breast Cancer Test Button'):
+    breast_cancer_prediction = breast_cancer.predict([[Diagnosis,Radius_mean,Texture_mean,Perimeter_mean,Area_mean,Smoothness_mean,Compactness_mean,Contactivity_mean,Concave_points_mean]])
     
-    if (diab_prediction[0] == 1):
-      diab_diagnosis = 'The person is diabetic'
+    if (breast_cancer_prediction[0] == 1):
+      breast_cancer_diagnosis = 'The Breast cancer is Malignant'
     else:
-      diab_diagnosis = 'The person is not diabetic'
+      breast_cancer_diagnosis = 'The Breast Cancer is Benign'
     
-st.success(diab_diagnosis)
+st.success(breast_cancer_diagnosis)
