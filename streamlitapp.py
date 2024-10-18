@@ -5,7 +5,7 @@ from streamlit_option_menu import option_menu
 
 # loading the saved models
 
-breast_cancer = pickle.load(open('BreastCancer_model.sav', 'rb'))
+breast_cancer = pickle.load(open('Breast_Cancer_model.sav', 'rb'))
 # page title
 st.title('Breast Cancer Prediction using ML')
 
