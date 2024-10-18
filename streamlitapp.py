@@ -9,7 +9,7 @@ breast_cancer = pickle.load(open('Breast_Cancer_model.sav', 'rb'))
 page_bg_img = '''
 <style>
     [data-testid="stAppViewContainer"] {
-        background-image: url("https://github.com/SHAIK-RAIYAN-2022-CSE/malaria/blob/main/Images-free-abstract-minimalist-wallpaper-HD.jpg?raw=true");
+        background-image: url("https://github.com/BhardwajChakri7/Breastcancer_model/blob/main/Images-free-abstract-minimalist-wallpaper-HD.jpg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
