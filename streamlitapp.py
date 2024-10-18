@@ -22,11 +22,8 @@ page_bg_img = '''
         max-width: 900px;
         margin: 50px auto;
         padding: 30px;
-        border: 2px solid rgba(255, 255, 255, 0.5);
-        border-radius: 15px;
         background: rgba(0, 0, 0, 0.4);
         backdrop-filter: blur(15px);
-        box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.7);
     }
     input {
         background-color: white !important;
@@ -36,6 +33,7 @@ page_bg_img = '''
         padding: 12px;
         font-size: 16px;
         margin-bottom: 10px;
+        width: 100%;
     }
     .stButton>button {
         background-color: #4CAF50;
@@ -50,9 +48,8 @@ page_bg_img = '''
         color: #4CAF50;
         border: 2px solid #4CAF50;
     }
-    h1, h2, h3, h4, h5, h6, p {
+    h1, p, label {
         color: white !important;
-        text-align: center;
     }
 </style>
 '''
@@ -62,25 +59,21 @@ st.markdown(page_bg_img, unsafe_allow_html=True)
 st.markdown("<h1>Malaria Prediction using Machine Learning</h1>", unsafe_allow_html=True)
 with st.container():
     st.markdown('<div class="content-container">', unsafe_allow_html=True)
-    col1, col2, col3, col4, col5 = st.columns(5)
+    col1, col2, col3 = st.columns(3)
 
     with col1:
         Temperature_Above_Avg = st.text_input('Temperature Above Avg')
-        Insecticide_Use = st.text_input('Insecticide Use')
+        High_Rainfall = st.text_input('High Rainfall')
+        High_Humidity = st.text_input('High Humidity')
 
     with col2:
-        High_Rainfall = st.text_input('High Rainfall')
+        Insecticide_Use = st.text_input('Insecticide Use')
         Health_Facilities_Adequate = st.text_input('Health Facilities Adequate')
-
-    with col3:
-        High_Humidity = st.text_input('High Humidity')
         Vaccination_Rate_High = st.text_input('Vaccination Rate High')
 
-    with col4:
+    with col3:
         High_Population_Density = st.text_input('High Population Density')
         Mosquito_Net_Coverage_High = st.text_input('Mosquito Net Coverage High')
-
-    with col5:
         Malaria_Outbreak = st.text_input('Malaria Outbreak')
 
     Malaria_diagnosis = ''
@@ -91,10 +84,10 @@ with st.container():
                 High_Population_Density, Malaria_Outbreak, Insecticide_Use,
                 Health_Facilities_Adequate, Vaccination_Rate_High, Mosquito_Net_Coverage_High
             ]])
-            if prediction[0] == 1:
-                Malaria_diagnosis = 'The person is affected with Malaria 😷'
-            else:
-                Malaria_diagnosis = 'The person is not affected with Malaria 😊'
+            Malaria_diagnosis = (
+                'The person is affected with Malaria 😷'
+                if prediction[0] == 1 else 'The person is not affected with Malaria 😊'
+            )
         except ValueError as e:
             st.error(f"Prediction error: {str(e)}")
 
@@ -105,26 +98,22 @@ with st.container():
 st.markdown("<h1>Breast Cancer Prediction using Machine Learning</h1>", unsafe_allow_html=True)
 with st.container():
     st.markdown('<div class="content-container">', unsafe_allow_html=True)
-    col1, col2, col3, col4, col5 = st.columns(5)
+    col1, col2, col3 = st.columns(3)
 
     with col1:
         diagnosis = st.text_input('Diagnosis')
-        smoothness_mean = st.text_input('Smoothness Mean')
+        radius_mean = st.text_input('Radius Mean')
+        texture_mean = st.text_input('Texture Mean')
 
     with col2:
-        radius_mean = st.text_input('Radius Mean')
-        compactness_mean = st.text_input('Compactness Mean')
+        perimeter_mean = st.text_input('Perimeter Mean')
+        area_mean = st.text_input('Area Mean')
+        smoothness_mean = st.text_input('Smoothness Mean')
 
     with col3:
-        texture_mean = st.text_input('Texture Mean')
+        compactness_mean = st.text_input('Compactness Mean')
         contactivity_mean = st.text_input('Contactivity Mean')
-
-    with col4:
-        perimeter_mean = st.text_input('Perimeter Mean')
         concave_points_mean = st.text_input('Concave Points Mean')
-
-    with col5:
-        area_mean = st.text_input('Area Mean')
 
     breast_cancer_diagnosis = ''
     if st.button('🔍 Predict Breast Cancer'):
@@ -134,10 +123,10 @@ with st.container():
                 area_mean, smoothness_mean, compactness_mean,
                 contactivity_mean, concave_points_mean
             ]])
-            if cancer_prediction[0] == 1:
-                breast_cancer_diagnosis = 'The Breast Cancer is Malignant 😷'
-            else:
-                breast_cancer_diagnosis = 'The Breast Cancer is Benign 😊'
+            breast_cancer_diagnosis = (
+                'The Breast Cancer is Malignant 😷'
+                if cancer_prediction[0] == 1 else 'The Breast Cancer is Benign 😊'
+            )
         except ValueError as e:
             st.error(f"Prediction error: {str(e)}")
 
