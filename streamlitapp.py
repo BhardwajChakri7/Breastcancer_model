@@ -4,7 +4,7 @@ import streamlit as st
 # Load the saved model
 breast_cancer = pickle.load(open('Breast_Cancer_model.sav', 'rb'))
 
-# CSS styles
+# CSS Styles
 page_bg_img = '''
 <style>
     [data-testid="stAppViewContainer"] {
@@ -48,7 +48,7 @@ page_bg_img = '''
         border: 2px solid #FF6347;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
     }
-    input[type="text"], input[type="number"], select {
+    input[type="number"] {
         background-color: white !important;
         color: black !important;
         border: 2px solid #FF6347;
@@ -59,7 +59,7 @@ page_bg_img = '''
         box-sizing: border-box;
         transition: border-color 0.3s, box-shadow 0.3s;
     }
-    input[type="text"]:focus, input[type="number"]:focus, select:focus {
+    input[type="number"]:focus {
         border-color: #FF4500;
         box-shadow: 0 0 5px rgba(255, 99, 71, 0.5);
         outline: none;
@@ -76,21 +76,23 @@ st.markdown(page_bg_img, unsafe_allow_html=True)
 # Page title
 st.markdown('<h1>Breast Cancer Prediction using Machine Learning</h1>', unsafe_allow_html=True)
 
-with st.container():
-    col1, col2 = st.columns(2)
+# 3-column layout for inputs
+col1, col2, col3 = st.columns(3)
 
-    with col1:
-        Diagnosis = st.text_input('Diagnosis', placeholder='Enter 0 or 1')
-        Radius_mean = st.text_input('Radius Mean', placeholder='e.g., 14.5')
-        Texture_mean = st.text_input('Texture Mean', placeholder='e.g., 19.0')
-        Perimeter_mean = st.text_input('Perimeter Mean', placeholder='e.g., 85.0')
+with col1:
+    Diagnosis = st.number_input('Diagnosis (0 or 1)', min_value=0, max_value=1, value=0)
+    Radius_mean = st.number_input('Radius Mean', min_value=5.0, max_value=30.0, value=14.5)
+    Smoothness_mean = st.number_input('Smoothness Mean', min_value=0.0, max_value=1.0, value=0.1)
 
-    with col2:
-        Area_mean = st.text_input('Area Mean', placeholder='e.g., 500.0')
-        Smoothness_mean = st.text_input('Smoothness Mean', placeholder='e.g., 0.1')
-        Compactness_mean = st.text_input('Compactness Mean', placeholder='e.g., 0.5')
-        Contactivity_mean = st.text_input('Contactivity Mean', placeholder='e.g., 0.7')
-        Concave_points_mean = st.text_input('Concave Points Mean', placeholder='e.g., 0.3')
+with col2:
+    Texture_mean = st.number_input('Texture Mean', min_value=5.0, max_value=50.0, value=19.0)
+    Perimeter_mean = st.number_input('Perimeter Mean', min_value=50.0, max_value=200.0, value=85.0)
+    Compactness_mean = st.number_input('Compactness Mean', min_value=0.0, max_value=1.0, value=0.5)
+
+with col3:
+    Area_mean = st.number_input('Area Mean', min_value=100.0, max_value=3000.0, value=500.0)
+    Contactivity_mean = st.number_input('Contactivity Mean', min_value=0.0, max_value=1.0, value=0.7)
+    Concave_points_mean = st.number_input('Concave Points Mean', min_value=0.0, max_value=1.0, value=0.3)
 
 # Prediction
 breast_cancer_diagnosis = ''
@@ -98,9 +100,9 @@ breast_cancer_diagnosis = ''
 # Prediction button
 if st.button('🔍 Predict', help='Click to predict breast cancer'):
     features = [
-        float(Diagnosis), float(Radius_mean), float(Texture_mean), 
-        float(Perimeter_mean), float(Area_mean), float(Smoothness_mean), 
-        float(Compactness_mean), float(Contactivity_mean), float(Concave_points_mean)
+        Diagnosis, Radius_mean, Texture_mean, 
+        Perimeter_mean, Area_mean, Smoothness_mean, 
+        Compactness_mean, Contactivity_mean, Concave_points_mean
     ]
     breast_cancer_prediction = breast_cancer.predict([features])
     
