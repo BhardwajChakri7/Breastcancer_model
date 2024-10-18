@@ -1,6 +1,5 @@
 import pickle
 import streamlit as st
-from streamlit_option_menu import option_menu
 
 # Load the saved model
 breast_cancer = pickle.load(open('Breast_Cancer_model.sav', 'rb'))
@@ -30,18 +29,18 @@ page_bg_img = '''
     h1 {
         color: white;
         text-align: center;
+        font-size: 48px; /* Increased font size for the title */
+        font-weight: bold;
     }
 </style>
 '''
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
-# Page title
-st.markdown('<div class="title">Breast Cancer Prediction using Machine Learning</div>', unsafe_allow_html=True)
+# Page title with larger font size
+st.markdown('<h1>Breast Cancer Prediction using Machine Learning</h1>', unsafe_allow_html=True)
 
 # Container for input data
 with st.container():
-    st.markdown('<div class="content">', unsafe_allow_html=True)
-
     col1, col2, col3, col4, col5 = st.columns(5)
 
     with col1:
@@ -76,7 +75,11 @@ with st.container():
 
     # Prediction button
     if st.button('🔍 Breast Cancer Test Button'):
-        breast_cancer_prediction = breast_cancer.predict([[Diagnosis, Radius_mean, Texture_mean, Perimeter_mean, Area_mean, Smoothness_mean, Compactness_mean, Contactivity_mean, Concave_points_mean]])
+        breast_cancer_prediction = breast_cancer.predict([[
+            Diagnosis, Radius_mean, Texture_mean, Perimeter_mean, 
+            Area_mean, Smoothness_mean, Compactness_mean, 
+            Contactivity_mean, Concave_points_mean
+        ]])
         
         if breast_cancer_prediction[0] == 1:
             breast_cancer_diagnosis = 'The Breast Cancer is Malignant 😷'
@@ -84,5 +87,3 @@ with st.container():
             breast_cancer_diagnosis = 'The Breast Cancer is Benign 😊'
 
     st.success(breast_cancer_diagnosis)
-
-    st.markdown('</div>', unsafe_allow_html=True)
