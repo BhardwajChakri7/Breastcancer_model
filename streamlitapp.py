@@ -15,7 +15,8 @@ with col1:
     diagnosis = st.selectbox('Diagnosis (M=1, B=0)', [0, 1], index=0)
     radius_mean = st.number_input('Radius Mean', min_value=0.0, value=17.99, step=0.01)
     texture_mean = st.number_input('Texture Mean', min_value=0.0, value=10.38, step=0.01)
-
+    perimeter_mean = st.number_input('Perimeter Mean', min_value=0.0, value=122.8, step=0.1)
+    
 with col2:
     smoothness_mean = st.number_input('Smoothness Mean', min_value=0.0, value=0.1184, step=0.0001)
     compactness_mean = st.number_input('Compactness Mean', min_value=0.0, value=0.2776, step=0.0001)
