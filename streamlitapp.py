@@ -20,8 +20,7 @@ with col1:
 with col2:
     area_mean = st.number_input('Area Mean', min_value=0.0, value=1001.0, step=1.0)
     smoothness_mean = st.number_input('Smoothness Mean', min_value=0.0, value=0.1184, step=0.0001)
-    compactness_mean = st.number_input('Compactness Mean', min_value=0.0, value=0.2776, step=0.0001)
-    concavity_mean = st.number_input('Concavity Mean', min_value=0.0, value=0.3001, step=0.0001)
+    
 
 with col3:
     concave_points_mean = st.number_input('Concave Points Mean', min_value=0.0, value=0.1471, step=0.0001)
