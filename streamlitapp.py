@@ -72,10 +72,10 @@ breast_cancer_diagnosis = ''
 if st.button('🔍 Breast Cancer Test Button'):
     breast_cancer_prediction = breast_cancer.predict([[Diagnosis, Radius_mean, Texture_mean, Perimeter_mean, Area_mean, Smoothness_mean, Compactness_mean, Contactivity_mean, Concave_points_mean]])
         
-        if breast_cancer_prediction[0] == 1:
-            breast_cancer_diagnosis = 'The Breast Cancer is Malignant 😷'
-        else:
-            breast_cancer_diagnosis = 'The Breast Cancer is Benign 😊'
+    if breast_cancer_prediction[0] == 1:
+        breast_cancer_diagnosis = 'The Breast Cancer is Malignant 😷'
+    else:
+        breast_cancer_diagnosis = 'The Breast Cancer is Benign 😊'
 
 st.success(breast_cancer_diagnosis)
 
