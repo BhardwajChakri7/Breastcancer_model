@@ -9,7 +9,7 @@ breast_cancer = pickle.load(open('Breast_Cancer_model.sav', 'rb'))
 page_bg_img = '''
 <style>
     [data-testid="stAppViewContainer"] {
-        background-image: url("https://github.com/SHAIK-RAIYAN-2022-CSE/malaria/blob/main/Images-free-abstract-minimalist-wallpaper-HD.jpg?raw=true");
+        background-image: url("https://github.com/BhardwajChakri7/Breastcancer_model/blob/main/Images-free-abstract-minimalist-wallpaper-HD.jpg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -17,13 +17,23 @@ page_bg_img = '''
     [data-testid="stHeader"] {
         background: rgba(0, 0, 0, 0); /* Transparent header */
     }
-    .content {
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        border-radius: 10px;
-        backdrop-filter: blur(10px);
+    .block-container {
+        max-width: 800px;
+        margin: 50px auto;
         padding: 20px;
-        margin: 20px auto;
-        width: 80%;
+        border: 2px solid #ccc;
+        border-radius: 15px;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(10px);
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.6);
+    }
+    input {
+        background-color: white !important;
+        color: black !important;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        font-size: 16px;
     }
     .stButton>button {
         background-color: #4CAF50;
@@ -38,64 +48,58 @@ page_bg_img = '''
         color: #4CAF50;
         border: 2px solid #4CAF50;
     }
-    .title {
-        font-size: 24px;
-        font-weight: bold;
-        text-align: center;
-        color: white;
+    h1, h2, h3, h4, h5, h6, p {
+        color: white !important;
     }
 </style>
 '''
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # Page title
-st.markdown('<div class="title">Breast Cancer Prediction using Machine Learning</div>', unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>Breast Cancer Prediction using Machine Learning</h1>", unsafe_allow_html=True)
 
-# Container for input data
+# Input section with a subheader
+st.subheader("Enter Patient's Clinical Data")
+
+# Organize inputs into rows and columns
 with st.container():
-    st.markdown('<div class="content">', unsafe_allow_html=True)
-
     col1, col2, col3, col4, col5 = st.columns(5)
 
     with col1:
-        Diagnosis = st.text_input('Diagnosis')
-        
+        diagnosis = st.text_input('Diagnosis')
+        smoothness_mean = st.text_input('Smoothness Mean')
+
     with col2:
-        Radius_mean = st.text_input('Radius Mean')
+        radius_mean = st.text_input('Radius Mean')
+        compactness_mean = st.text_input('Compactness Mean')
 
     with col3:
-        Texture_mean = st.text_input('Texture Mean')
-        
+        texture_mean = st.text_input('Texture Mean')
+        contactivity_mean = st.text_input('Contactivity Mean')
+
     with col4:
-        Perimeter_mean = st.text_input('Perimeter Mean')
-        
+        perimeter_mean = st.text_input('Perimeter Mean')
+        concave_points_mean = st.text_input('Concave Points Mean')
+
     with col5:
-        Area_mean = st.text_input('Area Mean')
+        area_mean = st.text_input('Area Mean')
 
-    with col1:
-        Smoothness_mean = st.text_input('Smoothness Mean')
-        
-    with col2:
-        Compactness_mean = st.text_input('Compactness Mean')
+# Prediction result
+breast_cancer_diagnosis = ''
 
-    with col3:
-        Contactivity_mean = st.text_input('Contactivity Mean')
-        
-    with col4:
-        Concave_points_mean = st.text_input('Concave Points Mean')
+# Prediction button
+if st.button('🔍 Predict Breast Cancer'):
+    try:
+        cancer_prediction = breast_cancer.predict([[diagnosis, radius_mean, texture_mean, perimeter_mean,
+                                                    area_mean, smoothness_mean, compactness_mean,
+                                                    contactivity_mean, concave_points_mean]])
 
-    # Prediction
-    breast_cancer_diagnosis = ''
-
-    # Prediction button
-    if st.button('🔍 Breast Cancer Test Button'):
-        breast_cancer_prediction = breast_cancer.predict([[Diagnosis, Radius_mean, Texture_mean, Perimeter_mean, Area_mean, Smoothness_mean, Compactness_mean, Contactivity_mean, Concave_points_mean]])
-        
-        if breast_cancer_prediction[0] == 1:
+        if cancer_prediction[0] == 1:
             breast_cancer_diagnosis = 'The Breast Cancer is Malignant 😷'
         else:
             breast_cancer_diagnosis = 'The Breast Cancer is Benign 😊'
+    except ValueError as e:
+        st.error(f"Prediction error: {str(e)}")
 
-    st.success(breast_cancer_diagnosis)
-
-    st.markdown('</div>', unsafe_allow_html=True)
+# Display result
+st.success(breast_cancer_diagnosis)
