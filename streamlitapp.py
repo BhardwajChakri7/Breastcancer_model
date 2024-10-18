@@ -23,7 +23,7 @@ st.markdown(
             background: rgba(0, 0, 0, 0);
         }
         .block-container {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.2);
             padding: 30px;
             border: 2px solid #ccc;
             border-radius: 15px;
@@ -33,7 +33,7 @@ st.markdown(
             box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.7);
         }
         h1 {
-            color: #ccc;
+            color: white;
             text-align: center;
             margin-bottom: 20px;
         }
