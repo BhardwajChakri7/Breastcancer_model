@@ -5,29 +5,50 @@ from streamlit_option_menu import option_menu
 # Load the saved model
 breast_cancer = pickle.load(open('Breast_Cancer_model.sav', 'rb'))
 
-# Page title with styling
-st.markdown(
-    """
-    <style>
-        .title {
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-            color: white;
-        }
-        .content {
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            padding: 20px;
-            margin: 20px auto;
-            width: 80%;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+# Use the raw GitHub link for the background image
+page_bg_img = '''
+<style>
+    [data-testid="stAppViewContainer"] {
+        background-image: url("https://github.com/SHAIK-RAIYAN-2022-CSE/malaria/blob/main/Images-free-abstract-minimalist-wallpaper-HD.jpg?raw=true");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    [data-testid="stHeader"] {
+        background: rgba(0, 0, 0, 0); /* Transparent header */
+    }
+    .content {
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        padding: 20px;
+        margin: 20px auto;
+        width: 80%;
+    }
+    .stButton>button {
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        padding: 10px 24px;
+        border-radius: 8px;
+        transition: 0.3s;
+    }
+    .stButton>button:hover {
+        background-color: white;
+        color: #4CAF50;
+        border: 2px solid #4CAF50;
+    }
+    .title {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        color: white;
+    }
+</style>
+'''
+st.markdown(page_bg_img, unsafe_allow_html=True)
 
+# Page title
 st.markdown('<div class="title">Breast Cancer Prediction using Machine Learning</div>', unsafe_allow_html=True)
 
 # Container for input data
